@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>BookFlix - Catálogo</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1>BookFlix</h1>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}">Início</a>
+            <a href="{{ url_for('lista_livros') }}">Catálogo</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2 class="catalogo-style">Lista de Livros</h2>
+
+
+        <form method="GET" action="{{ url_for('lista_livros') }}" class="search-form">
+            <select name="search_type">
+                <option value="tudo">Título ou Autor</option>
+                <option value="titulo">Título</option>
+                <option value="autor">Autor</option>
+            </select>
+            <input type="text" name="search_term" id="search_term" placeholder="Digite o termo desejado" value="{{ search_term }}">
+            <input type="submit" value="Pesquisar" class="btn">
+        </form>
+    </div>
+
+
+    <div class="lista-container">
+        {% if livros %}
+            <ul class="book-list">
+                {% for livro in livros %}
+                    <li class="book-info">
+                        <img src="{{ livro[5] }}" alt="{{ livro[1] }}" class="book-cover">
+                        <h3>{{ livro[1] }}</h3>
+                        <p>Autor: {{ livro[2] }}</p>
+                        <p>Ano: {{ livro[3] }}</p>
+                        <p>Preço: R$ {{ livro[4] }}</p>
+                        <a href="/excluir_livro/{{ livro[0] }}" class="delete-link">Excluir</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="error">Não encontramos nada, tente outro termo.</p>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        <p>&copy; {{ current_year }} BookFlix</p>
+    </footer>
+</body>
+</html>

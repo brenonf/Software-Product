@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <title>CRUD de Biblioteca</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <h1>Biblioteca</h1>
-        
+<head>
+    <title>BookFlix - Página Inicial</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1>BookFlix</h1>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}">Início</a>
+            <a href="{{ url_for('lista_livros') }}">Catálogo</a>
+            
+        </nav>
+    </header>
+
+    <div class="container">
         <h2>Adicionar Livro</h2>
         <form method="POST" action="/adicionar_livro" class="form">
             <div class="form-group">
@@ -27,15 +35,10 @@
             </div>
             <input type="submit" value="Adicionar" class="btn">
         </form>
+    </div>
     
-    <h2>Lista de Livros</h2>
-    <ul>
-        {% for livro in livros %}
-            <li>
-                {{ livro[1] }} - {{ livro[2] }} (Ano: {{ livro[3] }}, Preço: R$ {{ livro[4] }})
-                <a href="/excluir_livro/{{ livro[0] }}">Excluir</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <footer class="footer">
+        <p>&copy; {{ current_year }} BookFlix </p>
+    </footer>
 </body>
 </html>

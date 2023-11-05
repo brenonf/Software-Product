@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>BookFlix - Edição de Livro</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1>BookFlix</h1>
+        <nav class="nav">
+            <a href="{{ url_for('index') }}">Início</a>
+            <a href="{{ url_for('lista_livros') }}">Catálogo</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Edição de Livro</h2>
+        <form method="POST" class="form">
+            <label for="novo_titulo">Título:</label>
+            <input type="text" name="novo_titulo" value="{{ livro[1] }}" class="form-control"><br>
+
+            <label for="novo_autor">Autor:</label>
+            <input type="text" name="novo_autor" value="{{ livro[2] }}" class="form-control"><br>
+
+            <label for="novo_ano">Ano:</label>
+            <input type="text" name="novo_ano" value="{{ livro[3] }}" class="form-control"><br>
+
+            <label for="novo_preco">Preço:</label>
+            <input type="text" name="novo_preco" value="{{ livro[4] }}" class="form-control"><br>
+
+            <input type="submit" value="Salvar" class="btn">
+            <a href="{{ url_for('lista_livros') }}" class="btn">Cancelar</a>
+        </form>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; {{ current_year }} BookFlix</p>
+    </footer>
+</body>
+</html>

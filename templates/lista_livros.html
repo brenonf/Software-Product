@@ -15,8 +15,6 @@
 
     <div class="container">
         <h2 class="catalogo-style">Lista de Livros</h2>
-
-
         <form method="GET" action="{{ url_for('lista_livros') }}" class="search-form">
             <select name="search_type">
                 <option value="tudo">Título ou Autor</option>
@@ -28,28 +26,27 @@
         </form>
     </div>
 
-
     <div class="lista-container">
-        {% if livros %}
-            <ul class="book-list">
-                {% for livro in livros %}
-                    <li class="book-info">
-                        <img src="{{ livro[5] }}" alt="{{ livro[1] }}" class="book-cover">
-                        <h3>{{ livro[1] }}</h3>
-                        <p>Autor: {{ livro[2] }}</p>
-                        <p>Ano: {{ livro[3] }}</p>
-                        <p>Preço: R$ {{ livro[4] }}</p>
-                        <a href="/excluir_livro/{{ livro[0] }}" class="delete-link">Excluir</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p class="error">Não encontramos nada, tente outro termo.</p>
-        {% endif %}
+        <ul class="book-list">
+            {% for livro in livros %}
+                <li class="book-info">
+                    <img src="{{ livro[5] }}" alt="{{ livro[1] }}" class="book-cover">
+                    <h3 contenteditable="true" data-id="{{ livro[0] }}" class="editable">{{ livro[1] }}</h3>
+                    <p contenteditable="true" data-id="{{ livro[0] }}" class="editable">Autor: {{ livro[2] }}</p>
+                    <p contenteditable="true" data-id="{{ livro[0] }}" class="editable">Ano: {{ livro[3] }}</p>
+                    <p contenteditable="true" data-id="{{ livro[0] }}" class="editable">Preço: R$ {{ livro[4] }}</p>
+                    <a href="/excluir_livro/{{ livro[0] }}" class="delete-link">Excluir</a>
+                    <a href="{{ url_for('edicao_livro', idLivros=livro[0]) }}" class="edit-link">Editar</a>
+
+                </li>
+            {% endfor %}
+        </ul>
     </div>
 
     <footer class="footer">
         <p>&copy; {{ current_year }} BookFlix</p>
     </footer>
+
+
 </body>
 </html>
